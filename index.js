@@ -2,6 +2,7 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 const buttonStart = document.getElementById("start");
+const buttonReset = document.getElementById("reset");
 
 
 
@@ -153,10 +154,10 @@ class Item {
         gameOver(){
             ctx.fillStyle="white"
             ctx.font = "100px Arial"
-            ctx.fillText("GAME OVER",150,150)
-            audio1.play()
+            ctx.fillText("GAME OVER",300,150)
+            // audio1.play()
             ctx.font = "50px Arial"
-            ctx.fillText(`Your score: ${ Math.round(frames/25)} `,150,300)
+            ctx.fillText(`Your score: ${ Math.round(frames/25)} `,300,300)
         }
 
         win(){
@@ -181,9 +182,23 @@ const luchador = new Luchador(100,canvas.height/2,40,75)
 
 // START GAME
 function startGame() {
-    console.log("prueba de inicio de juego")
+    // console.log("prueba de inicio de juego")
+   
     requestID = requestAnimationFrame(updateCanvas)
 }
+
+
+
+// RESET/REFRESH PAGE
+function refreshPage() {
+    // console.log("prueba de inicio de juego")
+    location.reload()
+}
+
+
+
+
+
 
 
 
@@ -213,6 +228,10 @@ if(requestID){
 buttonStart.addEventListener("click",startGame)
 
 
+// RESET DE PAGINA (REFRESH)
+buttonReset.addEventListener("click",refreshPage)
+
+
 
 
   // GENERAR ENEMIGOS
@@ -237,7 +256,7 @@ function drawEnemies(){
         enemy.draw()
 
         if(luchador.collision(enemy)){
-            console.log("hay contacto")
+            // console.log("hay contacto")
             luchador.vidas --
             enemies.splice(index_enemy,1)
         }
@@ -246,7 +265,7 @@ function drawEnemies(){
             kemonito.draw()
     
         if(kemonito.collision(enemy)){
-            console.log("se muere una momia")
+            // console.log("se muere una momia")
             enemies.splice(index_enemy,1)
             kemonitos.splice(index_kemonito,1)
             }})
@@ -273,8 +292,8 @@ function drawEnemies(){
 function score(){
     const puntos = Math.round(frames/25)
     ctx.fillStyle="white"
-    ctx.font = '20px Arial';
-    ctx.fillText(`Score ${puntos}`, canvas.width-100, 25);
+    ctx.font = '30px Arial';
+    ctx.fillText(`Score ${puntos}`, canvas.width-130, 35);
   }
 
 
@@ -283,10 +302,10 @@ function score(){
   function corazones(){
     const vida = new Image()
     vida.src = "assets/images/vidas.png"
-    ctx.drawImage(vida,0,5,60,30)
+    ctx.drawImage(vida,0,5,80,40)
     ctx.fillStyle="white"
-    ctx.font = '20 px Arial';
-    ctx.fillText(`X ${luchador.vidas}`, 60,30); 
+    ctx.font = '30 px Arial';
+    ctx.fillText(`X ${luchador.vidas}`, 70,35); 
   }
 
 
